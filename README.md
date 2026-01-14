@@ -12,7 +12,7 @@ Projekt realizuje system obsługi miejskich hulajnóg z podziałem na role użyt
     * **Klient:** Wypożyczanie, podgląd baterii, zgłaszanie usterek/opinii.
     * **Mechanik:** Panel awarii, naprawa pojazdów, ładowanie baterii (pojedynczo).
     * **Administrator:** Pełne zarządzanie użytkownikami (CRUD, zmiana ról), zarządzanie flotą (CRUD + Masowa Edycja), statystyki.
-4.  **Dostępność (Accessibility):** Dostosowanie interfejsu (m.in. atrybuty `aria-label`, kontrast Bootstrap 5).
+4.  **Dostępność (Accessibility):** Dostosowanie interfejsu, kontrast Bootstrap 5).
 5.  **Kontrola Wersji:** Projekt zarządzany w systemie **Git**.
 6.  **Testy Jednostkowe:** Zaimplementowano **30 automatycznych testów** (`php artisan test`) sprawdzających logikę biznesową, bezpieczeństwo i działanie tras.
 

@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Models\Station;
 use App\Models\Vehicle;
 use App\Models\Rental;
-// use App\Models\Payment; // <-- WYWALONE
 use App\Models\Review;
 
 class DatabaseSeeder extends Seeder
@@ -21,7 +20,6 @@ class DatabaseSeeder extends Seeder
             Station::truncate();
             Vehicle::truncate();
             Rental::truncate();
-            // Payment::truncate(); // <-- WYWALONE
             Review::truncate();
             \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         } catch (\Exception $e) {
@@ -29,7 +27,6 @@ class DatabaseSeeder extends Seeder
             Station::query()->delete();
             Vehicle::query()->delete();
             Rental::query()->delete();
-            // Payment::query()->delete(); // <-- WYWALONE
             Review::query()->delete();
         }
 
@@ -62,10 +59,6 @@ class DatabaseSeeder extends Seeder
 
         $v1 = Vehicle::first();
         $rental = Rental::create(['user_id' => $client->id, 'vehicle_id' => $v1->id, 'start_time' => now()->subDays(2), 'end_time' => now()->subDays(2)->addMinutes(30), 'total_cost' => 15.50]);
-
-        // PŁATNOŚĆ WYWALONA
-        // Payment::create([...]); 
-
         Review::create(['user_id' => $client->id, 'vehicle_id' => $v1->id, 'rating' => 5, 'comment' => 'Super sprzęt!', 'is_fixed' => true]);
     }
 }

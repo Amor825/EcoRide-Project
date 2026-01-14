@@ -45,7 +45,7 @@ Mechanik widzi **tylko** zgłoszenia awarii (oceny 1-2 gwiazdki). Pozytywne opin
 
 1.  **Sklonuj repozytorium:**
     ```bash
-    git clone [https://github.com/twoj-nick/EcoRide-Project.git](https://github.com/twoj-nick/EcoRide-Project.git)
+    git clone [https://github.com/Amor825/EcoRide-Project.git](https://github.com/Amor825/EcoRide-Project.git)
     cd EcoRide-Project
     ```
 

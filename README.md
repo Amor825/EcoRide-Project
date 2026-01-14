@@ -1,120 +1,95 @@
-# System Wypożyczania Hulajnóg Elektrycznych - EcoRide (Laravel Edition)
+# 🛴 EcoRide - System Wypożyczania Hulajnóg Elektrycznych
 
-Kompleksowa aplikacja internetowa typu E-Commerce/Rental stworzona w oparciu o framework **Laravel 10**, służąca do zarządzania flotą miejskich pojazdów elektrycznych. System oferuje dedykowane panele dla Administratorów, Mechaników oraz Klientów, zapewniając pełną obsługę procesu wypożyczania, płatności oraz serwisu technicznego.
+Responsywna aplikacja internetowa oparta na frameworku **Laravel**, służąca do zarządzania flotą hulajnóg elektrycznych, ich wypożyczaniem oraz serwisowaniem.
 
-Projekt kładzie szczególny nacisk na **dostępność cyfrową (WCAG 2.1)**, poprawność semantyczną HTML5 oraz niezawodność potwierdzoną testami.
+## 📋 Opis Projektu
+Projekt realizuje system obsługi miejskich hulajnóg z podziałem na role użytkowników. Aplikacja symuluje rzeczywiste zużycie baterii w czasie, pozwala zgłaszać usterki oraz zarządzać flotą pojazdów z poziomu panelu administratora.
+
+### ✅ Spełnione Wymagania Projektowe
+1.  **Struktura Bazy Danych:** System oparty na **9 tabelach** (Users, Vehicles, Stations, Rentals, Reviews + tabele systemowe Laravela).
+2.  **Migracje i Seedery:** Pełna automatyzacja struktury bazy danych. Komenda `migrate:fresh --seed` tworzy kompletne środowisko testowe z użytkownikami, stacjami i historią.
+3.  **Podział Uprawnień (Role):**
+    * **Klient:** Wypożyczanie, podgląd baterii, zgłaszanie usterek/opinii.
+    * **Mechanik:** Panel awarii, naprawa pojazdów, ładowanie baterii (pojedynczo).
+    * **Administrator:** Pełne zarządzanie użytkownikami (CRUD, zmiana ról), zarządzanie flotą (CRUD + Masowa Edycja), statystyki.
+4.  **Dostępność (Accessibility):** Dostosowanie interfejsu, kontrast Bootstrap 5).
+5.  **Kontrola Wersji:** Projekt zarządzany w systemie **Git**.
+6.  **Testy Jednostkowe:** Zaimplementowano **30 automatycznych testów** (`php artisan test`) sprawdzających logikę biznesową, bezpieczeństwo i działanie tras.
 
 ---
 
 ## 🚀 Kluczowe Funkcjonalności
 
-### 1. Dostępność i UX (Premium Accessibility)
-Projekt wyznacza nowe standardy w dostępności aplikacji webowych:
-* **Tryb Wysokiego Kontrastu:** Dedykowany styl czarno-żółty/cyjan dla maksymalnej czytelności (zgodny z WCAG), przełączany jednym kliknięciem.
-* **Skalowanie Tekstu:** Widget pozwalający na dynamiczną zmianę wielkości czcionki (A-, A, A+).
-* **Responsywność:** Pełna obsługa urządzeń mobilnych (RWD) dzięki **Tailwind CSS / Bootstrap 5**.
-* **Semantyka:** Poprawne użycie znaczników HTML5 i atrybutów ARIA.
+### 🔋 Symulacja Baterii (Real-Time)
+System nie odejmuje baterii "na sztywno". Stan naładowania spada dynamicznie w zależności od czasu, jaki upłynął od ostatniej aktywności hulajnogi.
 
-### 2. Panel Klienta
-Interfejs dla użytkowników końcowych z walidacją biznesową:
-* **Wypożyczanie Pojazdów:** Proces wyboru czasu jazdy i kalkulacji kosztów (symulacja płatności).
-* **Inteligentna Dostępność:** System blokuje możliwość wypożyczenia pojazdów rozładowanych (< 10%) lub będących w serwisie.
-* **Historia:** Wgląd w historię tras i poniesionych opłat.
+### 🛠️ Panel Mechanika
+Mechanik widzi **tylko** zgłoszenia awarii (oceny 1-2 gwiazdki). Pozytywne opinie trafiają do Administratora. Mechanik może jednym kliknięciem naprawić i naładować pojazd.
 
-### 3. Panel Lekarza (Mechanika) i Magazyn
-Narzędzia wspierające utrzymanie floty:
-* **Zgłoszenia Serwisowe (Maintenance):** Raportowanie usterek (np. "Urwane koło", "Błąd sterownika") i oznaczanie ich jako naprawione.
-* **Stan Baterii:** Monitorowanie poziomu naładowania pojazdów w czasie rzeczywistym.
-
-### 4. Panel Administratora
-Pełna kontrola nad systemem:
-* **Zarządzanie Użytkownikami:** Możliwość blokowania i usuwania kont.
-* **Flota:** Dodawanie nowych stacji dokujących i pojazdów do systemu.
+### 🔐 Panel Administratora
+* **Zarządzanie Użytkownikami:** Dodawanie, usuwanie, zmiana ról (z blokadą zmiany własnej roli).
+* **Masowa Edycja Floty:** Możliwość szybkiej zmiany cen lub stanu baterii dla wielu pojazdów jednocześnie (Bulk Update).
+* **Statystyki:** Podgląd liczby wypożyczeń, użytkowników i floty.
 
 ---
 
-## 🛠 Technologie
-
-Projekt został zrealizowany przy użyciu nowoczesnego stosu technologicznego PHP:
-* **Backend:** PHP 8.2+, Laravel 10/11
-* **Baza Danych:** SQLite (Lekka baza w pliku - idealna do przenoszenia projektu)
-* **Frontend:** Blade Templates, Tailwind CSS / Bootstrap
-* **Testy:** PHPUnit (Feature Tests)
+## ⚙️ Technologie
+* **Backend:** PHP, Laravel Framework
+* **Baza danych:** SQLite
+* **Frontend:** Blade Templates, Bootstrap 5 (Responsywność)
+* **Testy:** PHPUnit
 
 ---
 
-## ⚙️ Instalacja i Konfiguracja
-
-Aby uruchomić projekt w środowisku lokalnym, wykonaj następujące kroki:
+## 📥 Instalacja i Uruchomienie
 
 1.  **Sklonuj repozytorium:**
     ```bash
     git clone [https://github.com/Amor825/EcoRide-Project.git](https://github.com/Amor825/EcoRide-Project.git)
-    cd EcoRide-Laravel
+    cd EcoRide-Project
     ```
 
-2.  **Zainstaluj zależności PHP:**
+2.  **Zainstaluj zależności:**
     ```bash
     composer install
+    npm install
     ```
 
 3.  **Skonfiguruj środowisko:**
-    Skopiuj plik `.env.example` na `.env` i skonfiguruj bazę (domyślnie SQLite jest już ustawione).
+    Skopiuj plik `.env.example` jako `.env` i wygeneruj klucz:
     ```bash
     cp .env.example .env
-    ```
-
-4.  **Wygeneruj klucz aplikacji:**
-    ```bash
     php artisan key:generate
     ```
 
-5.  **Przygotuj bazę danych (SQLite):**
-    Utwórz pusty plik bazy (jeśli nie istnieje):
-    * Windows: `New-Item database/database.sqlite`
-    * Mac/Linux: `touch database/database.sqlite`
-
-6.  **Uruchom migracje i seedery:**
-    To polecenie utworzy tabele i wypełni je danymi testowymi (20 hulajnóg, stacje, konta).
+4.  **Uruchom migracje i seedery (WAŻNE!):**
+    Ta komenda utworzy bazę i wypełni ją przykładowymi danymi:
     ```bash
     php artisan migrate:fresh --seed
     ```
 
-7.  **Uruchom serwer:**
+5.  **Uruchom serwer:**
     ```bash
     php artisan serve
     ```
 
-Aplikacja będzie dostępna pod adresem: `http://127.0.0.1:8000`
+---
+
+## 🔑 Dane Logowania (Demo)
+
+System po uruchomieniu seedera posiada gotowe konta testowe:
+
+| Rola | Email | Hasło | Opis Uprawnień |
+| :--- | :--- | :--- | :--- |
+| **Administrator** | `admin@ecoride.com` | `Admin123!` | Pełny dostęp do panelu Admina, edycja floty i userów. |
+| **Mechanik** | `mechanik@ecoride.com` | `Mechanik123!` | Dostęp do panelu Mechanika, naprawy, ładowanie. |
+| **Klient** | `klient@ecoride.com` | `Klient123!` | Wypożyczanie hulajnóg, dodawanie opinii. |
 
 ---
 
-## 🧪 Konta Testowe (Seed Data)
+## 🧪 Testowanie Aplikacji
 
-Po wykonaniu seedowania bazy danych, dostępne są następujące konta:
-**Hasło dla wszystkich kont:** `password` (lub `Haslo123!` zależnie od seedera)
+Aby sprawdzić poprawność działania wszystkich funkcji (logowanie, rejestracja, dostęp do paneli, tworzenie pojazdów), uruchom:
 
-| Rola | Email | Uprawnienia |
-| :--- | :--- | :--- |
-| **Administrator** | `admin@ecoride.com` | Pełny dostęp, zarządzanie użytkownikami i flotą. |
-| **Mechanik** | `mechanik@ecoride.com` | Obsługa zgłoszeń serwisowych, podgląd stanu technicznego. |
-| **Klient** | `klient@ecoride.com` | Wypożyczanie pojazdów, historia transakcji. |
-
----
-
-## 📊 Schemat Bazy Danych
-
-System opiera się na relacyjnej bazie danych zawierającej kluczowe tabele:
-1.  `users` (Role: Admin, Mechanic, Client)
-2.  `stations` (Lokalizacje dokowania)
-3.  `vehicles` (Hulajnogi z parametrami baterii i ceny)
-4.  `rentals` (Historia wypożyczeń)
-5.  `payments` (Transakcje finansowe)
-6.  `maintenance_tickets` (Zgłoszenia awarii)
-
----
-
-### Autor
-**Michał Lepak **
-Nr indeksu: **21255**
-Projekt zaliczeniowy: Aplikacje Internetowe I
+```bash
+php artisan test

@@ -29,7 +29,6 @@ Mechanik widzi **tylko** zgłoszenia awarii (oceny 1-2 gwiazdki). Pozytywne opin
 ### 🔐 Panel Administratora
 * **Zarządzanie Użytkownikami:** Dodawanie, usuwanie, zmiana ról (z blokadą zmiany własnej roli).
 * **Masowa Edycja Floty:** Możliwość szybkiej zmiany cen lub stanu baterii dla wielu pojazdów jednocześnie (Bulk Update).
-* **Statystyki:** Podgląd liczby wypożyczeń, użytkowników i floty.
 
 ---
 
@@ -52,7 +51,6 @@ Mechanik widzi **tylko** zgłoszenia awarii (oceny 1-2 gwiazdki). Pozytywne opin
 2.  **Zainstaluj zależności:**
     ```bash
     composer install
-    npm install
     ```
 
 3.  **Skonfiguruj środowisko:**

@@ -141,8 +141,12 @@
                     @endif
 
                     <span class="text-muted d-none d-md-block ms-2">| {{ Auth::user()->name }}</span>
+                    
+                    {{-- POPRAWIONY FORMULARZ WYLOGOWANIA --}}
                     <form method="POST" action="{{ route('logout') }}" class="m-0 ms-2">
-                        @csrf
+                        {{-- ZAMIAST @csrf UŻYWAMY RĘCZNEGO INPUTA BEZ AUTOCOMPLETE --}}
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        
                         <button type="submit" class="btn btn-link text-danger text-decoration-none fw-bold">Wyloguj</button>
                     </form>
                 @else

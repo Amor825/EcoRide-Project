@@ -95,7 +95,10 @@
                                         <td>{{ $u->email }}</td>
                                         
                                         <td>
-                                            @if($u->id === auth()->id())
+                                            {{-- ZABEZPIECZENIE GŁÓWNEGO ADMINA (ID 1) --}}
+                                            @if($u->id == 1)
+                                                <span class="badge bg-dark">👑 GŁÓWNY ADMIN</span>
+                                            @elseif($u->id === auth()->id())
                                                 <span class="badge bg-danger">Ty (Admin)</span>
                                             @else
                                                 <form action="{{ route('admin.users.update', $u->id) }}" method="POST">
@@ -117,11 +120,12 @@
                                         </td>
 
                                         <td>
-                                            @if($u->id !== auth()->id())
+                                            {{-- NIE MOŻNA USUNĄĆ GŁÓWNEGO ADMINA ANI SIEBIE --}}
+                                            @if($u->id !== auth()->id() && $u->id != 1)
                                             <form action="{{ route('admin.users.destroy', $u->id) }}" method="POST" onsubmit="return confirm('Na pewno usunąć użytkownika {{ $u->name }}?')">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <button class="btn btn-sm btn-outline-danger border-0">🗑️</button>
+                                                <button class="btn btn-sm btn-outline-danger border-0" aria-label="Usuń użytkownika">🗑️</button>
                                             </form>
                                             @endif
                                         </td>
